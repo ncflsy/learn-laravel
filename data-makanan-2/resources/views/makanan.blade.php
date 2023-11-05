@@ -13,6 +13,7 @@
             <h1 class="text-3xl text-center">Daftar Makanan</h1>
             <div id="formAction" class="flex justify-between">
                 <form action="{{ url('makanan') }}" method="GET" id="formSelect">
+                    @csrf
                     <label for="filter">Filter Menu : </label>
                     <select name="kategori" id="kategori" class="border px-4 py-1 rounded-md bg-indigo-500 text-white" onchange="submitForm()">
                         <option value="" {{ isset($kategori) && $kategori === 'semua' ? 'selected':' ' }}>semua</option>
@@ -20,10 +21,15 @@
                         <option value="minuman" {{ isset($kategori) && $kategori === 'minuman' ? 'selected' : '' }}>minuman</option>
                     </select>
                 </form>
-                <form action="{{ url('makanan') }}" method="GET" id="formSearch">
-                    <input type="text" name="search" placeholder="Cari menu.." class="border px-4 py-1 rounded-lg" value="{{ isset($search) ? $search :'' }}">
-                    <button type="submit" class="bg-indigo-500 text-white px-4 py-1 rounded-lg"> Cari </button>
-                </form>
+                <div class="flex gap-4">
+                    <a href="{{url('makanan/create')}}" class="px-4 py-1 bg-green-600 text-white rounded-lg">Tambah</a>
+                    <form action="{{ url('makanan') }}" method="GET" id="formSearch">
+                        @csrf
+                        <input type="text" name="search" placeholder="Cari menu.." class="border px-4 py-1 rounded-lg" value="{{ isset($search) ? $search :'' }}">
+                        <button type="submit" class="bg-indigo-500 text-white px-4 py-1 rounded-lg"> Cari </button>
+                    </form>
+                </div>
+               
             </div>
             <div id="kumpulan-card" class="flex gap-10 flex-wrap justify-center mx-auto mt-10">
                 @foreach ($data as $item)

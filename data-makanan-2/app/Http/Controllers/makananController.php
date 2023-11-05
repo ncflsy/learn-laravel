@@ -35,7 +35,7 @@ class makananController extends Controller
      */
     public function create()
     {
-        //
+        return view('tambah');
     }
 
     /**
@@ -43,7 +43,16 @@ class makananController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = [
+            'nama' => $request->nama,
+            'kategori' => $request->kategori,
+            'keterangan' => $request->keterangan,
+            'harga' => $request->harga,
+        ];
+
+        makananModel::create($data);
+        $data = makananModel::orderBy('id', 'asc')->get();
+        return redirect()->to('makanan');
     }
 
     /**

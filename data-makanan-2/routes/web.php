@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/makanan', makananController::class);
+Route::resource('makanan', makananController::class);
